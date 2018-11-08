@@ -12,8 +12,13 @@
       </div>
     </header>
     <main :class="$style.main">
-      <div :class="$style.editor">
-        <slot name="editor"></slot>
+      <div :class="$style.content">
+        <div :class="$style.editor">
+          <slot name="editor"></slot>
+        </div>
+        <div :class="$style.compile">
+          <slot name="compile"></slot>
+        </div>
       </div>
       <div :class="$style.errors">
         <slot name="errors"></slot>
@@ -71,20 +76,32 @@ export default {
 }
 
 .slider {
+  margin-top: 10px;
   width: var(--width);
   border: solid 1px var(--gray);
 }
 
-.editor {
-  border: solid 1px var(--gray);
-  border-bottom: 0;
+.content{
   width: var(--width);
   height: var(--height);
+  clear: both;
 }
 
-.editor :global(.CodeMirror) {
-  width: var(--width);
+.editor,.compile {
+  float: left;
+  border: solid 1px var(--gray);
+  width: calc(var(--width) / 2);
   height: var(--height);
+  box-sizing:border-box;
+}
+
+.editor{
+  border-right: 0;
+}
+
+.editor :global(.CodeMirror), .compile :global(.CodeMirror) {
+  //width: var(--width);
+  height: 100%;
 }
 
 .errors {

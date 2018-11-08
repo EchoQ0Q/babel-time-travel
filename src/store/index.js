@@ -27,6 +27,7 @@ export default new Vuex.Store({
   state: {
     current: 0,
     transitions: [getSource("class Foo {}")],
+    start: getSource("class Foo {}"),
     options: {
       presets: ["es2015", "minify"]
     },
