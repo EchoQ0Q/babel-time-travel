@@ -23,9 +23,9 @@
       <div :class="$style.errors">
         <slot name="errors"></slot>
       </div>
-      <div :class="$style.slider">
+      <!-- <div :class="$style.slider">
         <slot name="slider"></slot>
-      </div>
+      </div> -->
     </main>
   </div>
 </template>

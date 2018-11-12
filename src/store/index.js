@@ -26,7 +26,7 @@ export default new Vuex.Store({
   strict: true,
   state: {
     current: 0,
-    transitions: [getSource("class Foo {}")],
+    transitions: [getSource("")],
     start: getSource("class Foo {}"),
     options: {
       presets: ["es2015", "minify"]
@@ -60,7 +60,8 @@ export default new Vuex.Store({
       state.current = 0;
     },
     receiveResult(state, transitions) {
-      state.transitions.push(...transitions);
+      //state.transitions.push(...transitions);
+      state.transitions = transitions;
     },
     addError(state, error) {
       state.error = error;
@@ -86,7 +87,7 @@ export default new Vuex.Store({
       commit("clearTransitions");
 
       const message = {
-        source: str2ab(state.transitions[0].code),
+        source: str2ab(state.transitions[0].code ? state.transitions[0].code : state.start.code),
         options: state.options
       };
       return babelWorker
@@ -102,10 +103,11 @@ export default new Vuex.Store({
             })
           );
 
-          commit("receiveResult", transitions);
+          commit("receiveResult", [transitions.pop()]);
           return transitions;
         })
         .catch(err => {
+          debugger;
           dispatch("error", err.message);
         });
     },

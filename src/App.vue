@@ -2,7 +2,7 @@
   <Layout :title="title">
     <Editor slot="editor"></Editor>
     <Compile slot="compile"></Compile>
-    <Slider slot="slider"></Slider>
+    <!-- <Slider slot="slider"></Slider> -->
     <Controls slot="controls"></Controls>
     <Errors slot="errors"></Errors>
   </Layout>
@@ -13,13 +13,13 @@ import Layout from "./components/Layout";
 import Editor from "./components/Editor";
 import Compile from "./components/Compile";
 import Controls from "./components/Controls";
-import Slider from "./components/Slider";
+// import Slider from "./components/Slider";
 import Errors from "./components/Errors";
 
 export default {
   name: "app",
   props: ["title"],
-  components: { Layout, Editor, Compile, Controls, Slider, Errors }
+  components: { Layout, Editor, Compile, Controls, Errors }
 };
 </script>
 
