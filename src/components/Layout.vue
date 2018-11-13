@@ -1,33 +1,37 @@
 <template>
   <div :class="$style.container">
-    <header :class="$style.header">
-      <h1 :class="$style.headerItem">{{title}}</h1>
-      <div :class="$style.headerItem">
-        <a href="https://github.com/boopathi/babel-time-travel" target="_blank">
-          <img src="//cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/svg/mark-github.svg" width="24" height="24" />
-        </a>
-      </div>
-      <div :class="$style.controls">
-        <slot name="controls"></slot>
-      </div>
-    </header>
-    <main :class="$style.main">
-      <div :class="$style.content">
-        <div :class="$style.editor">
-          <slot name="editor"></slot>
+    <menu :class="$style.menu"></menu>
+    <div :class="$style.box">
+      <header :class="$style.header">
+        <h1 :class="$style.headerItem">{{title}}</h1>
+        <div :class="$style.headerItem">
+          <a href="https://github.com/boopathi/babel-time-travel" target="_blank">
+            <img src="//cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/svg/mark-github.svg" width="24" height="24" />
+          </a>
         </div>
-        <div :class="$style.compile">
-          <slot name="compile"></slot>
+        <div :class="$style.controls">
+          <slot name="controls"></slot>
         </div>
-      </div>
-      <div :class="$style.errors">
-        <slot name="errors"></slot>
-      </div>
-      <!-- <div :class="$style.slider">
-        <slot name="slider"></slot>
-      </div> -->
-    </main>
+      </header>
+      <main :class="$style.main">
+        <div :class="$style.content">
+          <div :class="$style.editor">
+            <slot name="editor"></slot>
+          </div>
+          <div :class="$style.compile">
+            <slot name="compile"></slot>
+          </div>
+        </div>
+        <div :class="$style.errors">
+          <slot name="errors"></slot>
+        </div>
+        <!-- <div :class="$style.slider">
+          <slot name="slider"></slot>
+        </div> -->
+      </main>
+    </div>
   </div>
+  
 </template>
 
 <script>
@@ -38,13 +42,35 @@ export default {
 </script>
 
 <style module>
-.container {
-  --width: calc(100vw - 100px);
-  --height: 65vh;
+html,body{
+  width: 100%;
+  height: 100%;
+}
+
+.container{
+  position: relative;
+  padding: 20px;
+  padding-left: 220px;
+  width: 100%;
+  height: 100%;
+}
+
+.box {
+  width: 100%;
+  height: 100%;
+}
+
+.menu{
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 200px;
+  height: 100%;
 }
 
 .header {
-  width: var(--width);
+  width: 100%;
+  height: 95px;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
@@ -64,10 +90,7 @@ export default {
 }
 
 .main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  height: calc(100% - 95px);
   margin-bottom: 20px;
 }
 
@@ -77,21 +100,21 @@ export default {
 
 .slider {
   margin-top: 10px;
-  width: var(--width);
+  width: 100%;
   border: solid 1px var(--gray);
 }
 
 .content{
-  width: var(--width);
-  height: var(--height);
+  width: calc(100% - 95px);
+  height: 100%;
   clear: both;
 }
 
 .editor,.compile {
   float: left;
   border: solid 1px var(--gray);
-  width: calc(var(--width) / 2);
-  height: var(--height);
+  width: 50%;
+  height: 100%;
   box-sizing:border-box;
 }
 
@@ -100,12 +123,12 @@ export default {
 }
 
 .editor :global(.CodeMirror), .compile :global(.CodeMirror) {
-  //width: var(--width);
+  //width: 100%;
   height: 100%;
 }
 
 .errors {
-  width: var(--width);
+  width: 100%;
   position: relative;
 }
 </style>

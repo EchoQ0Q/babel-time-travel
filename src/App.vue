@@ -1,5 +1,6 @@
 <template>
   <Layout :title="title">
+    <Menus slot="menu"></Menus>
     <Editor slot="editor"></Editor>
     <Compile slot="compile"></Compile>
     <!-- <Slider slot="slider"></Slider> -->
@@ -10,6 +11,7 @@
 
 <script>
 import Layout from "./components/Layout";
+import Menus from "./components/Menu";
 import Editor from "./components/Editor";
 import Compile from "./components/Compile";
 import Controls from "./components/Controls";
@@ -19,7 +21,7 @@ import Errors from "./components/Errors";
 export default {
   name: "app",
   props: ["title"],
-  components: { Layout, Editor, Compile, Controls, Errors }
+  components: { Layout, Menus, Editor, Compile, Controls, Errors }
 };
 </script>
 

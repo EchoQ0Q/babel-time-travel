@@ -29,14 +29,14 @@ export default new Vuex.Store({
     transitions: [getSource("")],
     start: getSource("class Foo {}"),
     options: {
-      presets: ["es2015", "minify"]
+      presets: ["es2015"]
     },
     error: void 0,
     sw: null
   },
   getters: {
     availablePresets() {
-      return ["es2015", "stage-0", "stage-1", "stage-2", "stage-3", "minify"];
+      return ["es2015", "stage-0", "stage-1", "stage-2", "stage-3"];
     }
   },
   mutations: {
