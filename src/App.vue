@@ -11,7 +11,7 @@
 
 <script>
 import Layout from "./components/Layout";
-import Menus from "./components/Menu";
+import Menus from "./components/Menus";
 import Editor from "./components/Editor";
 import Compile from "./components/Compile";
 import Controls from "./components/Controls";

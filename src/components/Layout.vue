@@ -1,6 +1,5 @@
 <template>
   <div :class="$style.container">
-    <menu :class="$style.menu"></menu>
     <div :class="$style.box">
       <header :class="$style.header">
         <h1 :class="$style.headerItem">{{title}}</h1>
@@ -14,6 +13,9 @@
         </div>
       </header>
       <main :class="$style.main">
+        <div :class="$style.menu">
+          <slot name="menu"></slot>
+        </div>
         <div :class="$style.content">
           <div :class="$style.editor">
             <slot name="editor"></slot>
@@ -42,6 +44,10 @@ export default {
 </script>
 
 <style module>
+*{
+  box-sizing: border-box;
+}
+
 html,body{
   width: 100%;
   height: 100%;
@@ -50,7 +56,6 @@ html,body{
 .container{
   position: relative;
   padding: 20px;
-  padding-left: 220px;
   width: 100%;
   height: 100%;
 }
@@ -62,10 +67,11 @@ html,body{
 
 .menu{
   position: absolute;
-  left: 20px;
-  top: 20px;
+  left: 0;
+  top: 0;
   width: 200px;
   height: 100%;
+  overflow-y: auto;
 }
 
 .header {
@@ -90,8 +96,11 @@ html,body{
 }
 
 .main {
-  height: calc(100% - 95px);
+  position: relative;
   margin-bottom: 20px;
+  padding-left: 200px;
+  height: calc(100% - 95px);
+  
 }
 
 .controls {
