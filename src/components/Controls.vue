@@ -10,7 +10,7 @@
     <div :class="$style.container">
       <button :class="$style.button" @click="compile">Compile</button>
       <button :class="$style.button" @click="clear" title="Purge Caches and unregister ServiceWorker">
-        Purge
+        Reset
       </button>
     </div>
   </div>

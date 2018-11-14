@@ -22,6 +22,10 @@ function getSource(code) {
 const sourcePluginAlias = "source";
 const sourceVisitorType = "enter";
 
+import a from "../example/a";
+
+const compileCode = {a};
+
 export default new Vuex.Store({
   strict: true,
   state: {
@@ -32,7 +36,8 @@ export default new Vuex.Store({
       presets: ["es2015"]
     },
     error: void 0,
-    sw: null
+    sw: null,
+    curMenu: void 0
   },
   getters: {
     availablePresets() {
@@ -45,16 +50,24 @@ export default new Vuex.Store({
         state.current = current;
       }
     },
+    updateMenu(state, menu) {
+      menu && (state.curMenu = menu);
+      state.start = getSource(compileCode[state.curMenu] || "class Foo {}");
+      //清空编译器
+      state.transitions = [getSource("")];
+    },
     updateSource(state, code) {
       // remove the error;
       if (state.error) {
         state.error = void 0;
       }
-      state.transitions[0] = getSource(code);
+      //state.transitions[0] = getSource(code);
+      state.start = getSource(code);
     },
     updatePresets(state, presets) {
       state.options.presets = [...presets];
     },
+    
     clearTransitions(state) {
       state.transitions = [state.transitions[0]];
       state.current = 0;
@@ -87,7 +100,8 @@ export default new Vuex.Store({
       commit("clearTransitions");
 
       const message = {
-        source: str2ab(state.transitions[0].code ? state.transitions[0].code : state.start.code),
+        //source: str2ab(state.transitions[0].code ? state.transitions[0].code : state.start.code),
+        source: str2ab(state.start.code),
         options: state.options
       };
       return babelWorker
@@ -118,7 +132,8 @@ export default new Vuex.Store({
         });
       }
     },
-    clearCaches() {
+    clearCaches({ commit }) {
+      commit("updateMenu");
       if (caches) {
         return caches
           .keys()
@@ -126,6 +141,7 @@ export default new Vuex.Store({
           .then(() => console.log("All caches removed"))
           .catch(err => console.error(err));
       }
+      
     },
     unregisterSw({ state, commit }) {
       if (state.sw) {
