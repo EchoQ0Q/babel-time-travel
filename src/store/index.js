@@ -22,9 +22,7 @@ function getSource(code) {
 const sourcePluginAlias = "source";
 const sourceVisitorType = "enter";
 
-import a from "../example/a";
-
-const compileCode = {a};
+import compileCode from "../example/";
 
 export default new Vuex.Store({
   strict: true,

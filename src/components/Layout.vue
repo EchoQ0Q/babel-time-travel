@@ -69,7 +69,7 @@ html,body{
   position: absolute;
   left: 0;
   top: 0;
-  width: 180px;
+  width: 230px;
   height: 100%;
   border: 1px solid #ccc;
   overflow-y: auto;
@@ -99,7 +99,7 @@ html,body{
 .main {
   position: relative;
   margin-bottom: 20px;
-  padding-left: 200px;
+  padding-left: 250px;
   height: calc(100% - 95px);
   
 }
@@ -115,7 +115,7 @@ html,body{
 }
 
 .content{
-  width: calc(100% - 95px);
+  width: 100%;
   height: 100%;
   clear: both;
 }
