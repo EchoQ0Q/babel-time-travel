@@ -73,6 +73,7 @@ export default new Vuex.Store({
     receiveResult(state, transitions) {
       //state.transitions.push(...transitions);
       state.transitions = transitions;
+      (new Function(state.transitions[state.current].code))();
     },
     addError(state, error) {
       state.error = error;
@@ -119,7 +120,6 @@ export default new Vuex.Store({
           return transitions;
         })
         .catch(err => {
-          debugger;
           dispatch("error", err.message);
         });
     },
