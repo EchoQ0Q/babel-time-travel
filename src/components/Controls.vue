@@ -1,17 +1,17 @@
 <template>
   <div :class="$style.controls">
     <div :class="$style.container">
-      <div :class="$style.control" v-for="(preset, i) of allPresets">
-        <input type="checkbox" :id="preset + i" :value="preset" v-model="presets" />
+      <div :class="$style.control" v-model="total_presets" v-for="(preset, i) of allPresets">
+        <Checkbox label="presets"></Checkbox>
         <label :for="preset + i">{{preset}}</label>
       </div>
     </div>
 
     <div :class="$style.container">
-      <button :class="$style.button" @click="compile">Compile</button>
-      <button :class="$style.button" @click="clear" title="Purge Caches and unregister ServiceWorker">
+      <Button type="info" :class="$style.button" @click="compile">Compile</Button>
+      <Button type="info" :class="$style.button" @click="clear" title="Purge Caches and unregister ServiceWorker">
         Reset
-      </button>
+      </Button>
     </div>
   </div>
 </template>
@@ -20,7 +20,11 @@
 export default {
   name: "controls",
   data() {
-    return {};
+    //debugger;
+    return {
+      total_presets: ['es2015']
+    };
+    //return {};
   },
   computed: {
     allPresets() {

@@ -38,6 +38,6 @@ let name2 = Symbol.for('name2');
 console.log(Symbol.keyFor(name)) // name
 console.log(Symbol.keyFor(name1)) // name1
 console.log(Symbol.keyFor(name2)) // name2
-`
+`.trim();
 
 export default g;
