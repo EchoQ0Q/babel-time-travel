@@ -1,5 +1,5 @@
 <template>
-    <Menu :theme="theme2" width="100%" @on-select="selectMenu">
+    <Menu :theme="theme2" :open-names="['1']" width="100%" @on-select="selectMenu" >
         <Submenu name="1">
             <template slot="title"><Icon type="ios-paper"></Icon>目录</template>
             <Menu-item name="a">let和const</Menu-item>

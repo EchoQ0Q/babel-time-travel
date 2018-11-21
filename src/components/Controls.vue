@@ -1,11 +1,12 @@
 <template>
   <div :class="$style.controls">
-    <div :class="$style.container">
-      <div :class="$style.control" v-model="total_presets" v-for="(preset, i) of allPresets">
-        <Checkbox label="presets"></Checkbox>
-        <label :for="preset + i">{{preset}}</label>
+    <Checkbox-group :class="$style.container" v-model="curPresets" @on-change="setPresets">
+      <div :class="$style.control" v-for="(preset, i) of allPresets">
+        <Checkbox :label="preset" >
+          <span>{{preset}}</span>
+        </Checkbox>
       </div>
-    </div>
+    </Checkbox-group>
 
     <div :class="$style.container">
       <Button type="info" :class="$style.button" @click="compile">Compile</Button>
@@ -20,26 +21,30 @@
 export default {
   name: "controls",
   data() {
-    //debugger;
     return {
-      total_presets: ['es2015']
+      curPresets: this.$store.state.options.presets
     };
-    //return {};
   },
+  // created() {
+  //   this.curPresets = this.presets;
+  // },
   computed: {
     allPresets() {
       return this.$store.getters.availablePresets;
     },
-    presets: {
-      get() {
-        return this.$store.state.options.presets;
-      },
-      set(presets) {
-        this.$store.commit("updatePresets", presets);
-      }
-    }
+    //presets: {
+      // get() {
+      //   return this.$store.state.options.presets;
+      // },
+      // set(presets) {
+      //   this.$store.commit("updatePresets", presets);
+      // }
+    //}
   },
   methods: {
+    setPresets(presets) {
+      this.$store.commit("updatePresets", presets);
+    },
     compile() {
       this.$store.dispatch("compile");
     },
